@@ -156,10 +156,12 @@ pipeline_wavelet$run("wavelet_params")
 
 
 # ---- Re-reference: generate references from `good_channels` (30 s) -----------
+# Reload subject
+rave_subject <- raveio::RAVESubject$new(project_name = project_name, subject_code = subject_code)
+
 raveio::generate_reference(rave_subject, electrodes = good_channels)
 
 # load reference template and set the "Common Average Reference"
-rave_subject <- raveio::RAVESubject$new(project_name = project_name, subject_code = subject_code)
 reference_table <- data.frame(
   Electrode = rave_subject$preprocess_settings$electrodes,
   Group = "Default",
